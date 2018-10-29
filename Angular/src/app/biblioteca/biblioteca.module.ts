@@ -7,10 +7,12 @@ import {MatButtonModule} from '@angular/material/button';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
+import { BooksVisualizationComponent } from "./components/books-visualization/books-visualization.component";
 
 
 const COMPONENTS = [
-    BibliotecaComponent
+    BibliotecaComponent,
+    BooksVisualizationComponent
 ];
 
 const SERVICES = [
