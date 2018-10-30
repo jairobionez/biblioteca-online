@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Menu } from '../../enums/menu.enum';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-navbar',
@@ -15,6 +17,18 @@ export class NavbarComponent {
             map(result => result.matches)
         );
 
-    constructor(private breakpointObserver: BreakpointObserver) { }
-
+    constructor(
+        private breakpointObserver: BreakpointObserver,
+        private router: Router
+    ) { }
+    
+    navigate(indice: number){
+        switch(indice){
+            case Menu.cadastro:
+                this.router.navigate(['/registerbook'])
+                break;
+            case Menu.alugar:                
+                break;
+        }
+    }
 }

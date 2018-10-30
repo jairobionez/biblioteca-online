@@ -1,0 +1,41 @@
+<form [formGroup]="formBook">
+    <mat-grid-list cols="2" rowHeight="4:0.5">
+        <mat-grid-tile [colspan]="1">
+            <mat-form-field>
+                <input matInput formControlName="titulo" placeholder="Título">
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1">
+            <mat-form-field>
+                <input matInput formControlName="autor" placeholder="Autor">
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1">
+            <mat-form-field>
+                <mat-select placeholder="Editora" formControlName="editora">
+                    <mat-option *ngFor="let editora of editoras" [value]="editora.id">
+                        {{editora.nome}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1">
+            <!-- <mat-form-field>
+                <input [matDatepicker]="myDatepicker" formControlName="anopublicacao">
+                <mat-datepicker #myDatepicker></mat-datepicker>
+            </mat-form-field> -->
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1">
+            <mat-form-field>
+                <input matInput formControlName="descricao" placeholder="Descrição">                    
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2">
+            <mat-chip-list>
+                <mat-chip (click)="save()">Salvar</mat-chip>
+                <mat-chip>Editar</mat-chip>
+                <mat-chip color="accent" selected (click)="clear()">Limpar</mat-chip>
+            </mat-chip-list>
+        </mat-grid-tile>
+    </mat-grid-list>
+</form>
