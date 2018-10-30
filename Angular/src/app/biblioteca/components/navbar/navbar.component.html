@@ -6,8 +6,11 @@
         [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
         <mat-toolbar>Menu</mat-toolbar>
         <mat-nav-list>
+            <mat-divider></mat-divider>
             <a mat-list-item (click)="navigate(1)">Cadastro</a>
+            <mat-divider></mat-divider>
             <a mat-list-item (click)="navigate(2)">Alocar</a>
+            <mat-divider></mat-divider>
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>

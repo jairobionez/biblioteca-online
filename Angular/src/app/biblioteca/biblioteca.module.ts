@@ -17,6 +17,7 @@ import { MatToolbarModule,
          MAT_DATE_LOCALE,
          DateAdapter,
          MAT_DATE_FORMATS,
+         MatDividerModule,
          } from '@angular/material';
 import { BooksVisualizationComponent } from "./components/books-visualization/books-visualization.component";
 import { MatTabsModule } from '@angular/material/tabs';
@@ -24,8 +25,6 @@ import { MatInputModule } from '@angular/material/input';
 import { BooksTabComponent } from "./components/books-tab/books-tab.component";
 import { BooksRegisterComponent } from "./components/books-tab/books-register/books-register.component";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import * as _moment from 'moment';
-import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 
 const COMPONENTS = [
     BibliotecaComponent,
@@ -63,7 +62,8 @@ const SERVICES = [
         MatGridListModule,
         MatSelectModule,
         MatChipsModule,
-        MatDatepickerModule
+        MatDatepickerModule,
+        MatDividerModule
     ],
     providers: [
         // {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
