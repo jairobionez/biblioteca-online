@@ -20,14 +20,15 @@
             </mat-form-field>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="1">
-            <!-- <mat-form-field>
-                <input [matDatepicker]="myDatepicker" formControlName="anopublicacao">
-                <mat-datepicker #myDatepicker></mat-datepicker>
-            </mat-form-field> -->
+            <mat-form-field>
+                <input matInput [matDatepicker]="picker" formControlName="datapublicacao" placeholder="Data de publicação">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="1">
             <mat-form-field>
-                <input matInput formControlName="descricao" placeholder="Descrição">                    
+                <input matInput formControlName="descricao" placeholder="Descrição">
             </mat-form-field>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="2">

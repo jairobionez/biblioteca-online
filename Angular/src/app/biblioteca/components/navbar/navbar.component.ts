@@ -25,7 +25,7 @@ export class NavbarComponent {
     navigate(indice: number){
         switch(indice){
             case Menu.cadastro:
-                this.router.navigate(['/registerbook'])
+                this.router.navigate(['/books'])
                 break;
             case Menu.alugar:                
                 break;

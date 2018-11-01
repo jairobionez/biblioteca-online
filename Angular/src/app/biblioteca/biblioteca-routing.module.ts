@@ -8,7 +8,7 @@ const routes: Routes = [
     {
         path: '', component: BibliotecaComponent, children: [
             {
-                path: 'registerbook', component: BooksTabComponent,
+                path: 'books', component: BooksTabComponent,
             }
         ]
     }

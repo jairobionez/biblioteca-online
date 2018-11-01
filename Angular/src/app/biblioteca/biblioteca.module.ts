@@ -25,6 +25,7 @@ import { MatInputModule } from '@angular/material/input';
 import { BooksTabComponent } from "./components/books-tab/books-tab.component";
 import { BooksRegisterComponent } from "./components/books-tab/books-register/books-register.component";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 
 const COMPONENTS = [
     BibliotecaComponent,
@@ -66,8 +67,8 @@ const SERVICES = [
         MatDividerModule
     ],
     providers: [
-        // {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
-        // {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+        {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+        {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
     ]
 })
 

@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { DateAdapter } from "@angular/material";
 
 @Component({
     selector: 'books-register',
@@ -21,7 +22,8 @@ export class BooksRegisterComponent {
         {"id": 2, "nome": "NÃO"}
     ]
 
-    constructor() {
+    constructor(private adapter: DateAdapter<any>) {
+        this.adapter.setLocale('pt')
         this.createForm();
     }
 
@@ -31,7 +33,7 @@ export class BooksRegisterComponent {
             autor: ['', Validators.required],
             editora: [0, Validators.required],
             descricao: ['', Validators.required],
-            anopublicacao:['', Validators.required]
+            datapublicacao:['', Validators.required]
         });
     }
 
