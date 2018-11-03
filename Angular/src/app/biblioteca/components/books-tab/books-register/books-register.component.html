@@ -1,4 +1,5 @@
 <form [formGroup]="formBook">
+    <input formControlName="id" type="hidden">
     <mat-grid-list cols="2" rowHeight="4:0.5">
         <mat-grid-tile [colspan]="1">
             <mat-form-field>
@@ -21,7 +22,9 @@
         </mat-grid-tile>
         <mat-grid-tile [colspan]="1">
             <mat-form-field>
-                <input matInput [matDatepicker]="picker" formControlName="datapublicacao" placeholder="Data de publicação">
+                <input matInput [matDatepicker]="picker" formControlName="datapublicacao"
+                type="text"
+                 placeholder="Data de publicação">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
@@ -33,8 +36,8 @@
         </mat-grid-tile>
         <mat-grid-tile [colspan]="2">
             <mat-chip-list>
-                <mat-chip (click)="save()">Salvar</mat-chip>
-                <mat-chip>Editar</mat-chip>
+                <mat-chip *ngIf="!modeEdit" (click)="save()"> Salvar </mat-chip>
+                <mat-chip *ngIf="modeEdit" (click)="save()"> Editar </mat-chip>
                 <mat-chip color="primary" selected (click)="clear()">Limpar</mat-chip>
             </mat-chip-list>
         </mat-grid-tile>

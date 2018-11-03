@@ -1,10 +1,9 @@
 <mat-sidenav-container class="sidenav-container">
-    <mat-sidenav #drawer 
-        class="sidenav" 
-        fixedInViewport="true" 
-        [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
         [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
-        <mat-toolbar>Menu</mat-toolbar>
+        <mat-toolbar class="pointer">
+            Home
+        </mat-toolbar>
         <mat-nav-list>
             <mat-divider></mat-divider>
             <a mat-list-item (click)="navigate(1)">Cadastro</a>
@@ -15,9 +14,7 @@
     </mat-sidenav>
     <mat-sidenav-content>
         <mat-toolbar color="primary">
-            <button type="button" 
-                aria-label="Toggle sidenav"
-                mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
+            <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
                 <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
             </button>
             <span>Biblioteca Toboguim</span>

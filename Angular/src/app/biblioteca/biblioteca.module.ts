@@ -21,6 +21,7 @@ import { MatToolbarModule,
          MatTableModule,
          MatPaginatorModule,
          MatProgressSpinnerModule,
+         MatCheckboxModule,
          } from '@angular/material';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatInputModule } from '@angular/material/input';
@@ -29,6 +30,7 @@ import { BooksRegisterComponent } from "./components/books-tab/books-register/bo
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 import { BooksVisualizationComponent } from "./components/books-tab/books-visualization/books-visualization.component";
+import { BooksService } from "./services/books.service";
 
 const COMPONENTS = [
     BibliotecaComponent,
@@ -70,9 +72,11 @@ const SERVICES = [
         MatDividerModule,
         MatTableModule,
         MatPaginatorModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        MatCheckboxModule
     ],
     providers: [
+        BooksService,
         {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
         {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
     ]

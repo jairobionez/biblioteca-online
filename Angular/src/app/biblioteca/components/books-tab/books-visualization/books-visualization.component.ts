@@ -1,6 +1,8 @@
-import { Component, ViewChild, OnInit } from "@angular/core";
+import { Component, ViewChild, OnInit, AfterViewInit, SimpleChanges, ErrorHandler } from "@angular/core";
 import { MatPaginator, MatTableDataSource } from '@angular/material';
-
+import { FakeData } from "src/app/biblioteca/models/fake-data.entity";
+import { SelectionModel } from "@angular/cdk/collections";
+import { BooksService } from "src/app/biblioteca/services/books.service";
 
 @Component({
     selector: 'books-visualization',
@@ -8,56 +10,52 @@ import { MatPaginator, MatTableDataSource } from '@angular/material';
     styleUrls: ['./books-visualization.component.scss']
 })
 
-export class BooksVisualizationComponent {
+export class BooksVisualizationComponent implements OnInit {
 
-    displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-    dataSource = new MatTableDataSource(ELEMENT_DATA);
+    displayedColumns: string[] = ['id', 'titulo', 'autor', 'datapublicacao', 'descricao', 'editora', 'actions'];
+    dataSource = new MatTableDataSource<FakeData>();
     @ViewChild(MatPaginator) paginator: MatPaginator;
 
-    loadingfinish: boolean;
+    loadingfinish: boolean = false;
+    selection = new SelectionModel<FakeData>(true, []);
 
-    constructor() {
-        this.dataSource.paginator = this.paginator;
+    constructor(private _bookServe: BooksService) {
     }
 
     ngOnInit(): void {
         this.loadingfinish = false;
         setTimeout(() => {
+            this.dataSource = new MatTableDataSource(Data)
+            this.setPaginator();
             this.loadingfinish = true;
-        }, 500000000);
+        }, 5000);
+    }
+
+    setPaginator() {
+        this.dataSource.paginator = this.paginator;
     }
 
     applyFilter(filterValue: string) {
         this.dataSource.filter = filterValue.trim().toLowerCase();
     }
+
+    edit(id: number): void {
+        this._bookServe.updateBook(this.dataSource.data.find(d => d.id == id));
+    }
+
+    delete(id: number): void {
+        const index = this.dataSource.data.findIndex(k => k.id == id);
+        this.dataSource.data.splice(index, 1);
+        this.refresh();
+    }
+
+    refresh() {
+        this.dataSource = new MatTableDataSource(Data);
+    }
 }
 
-export interface PeriodicElement {
-    name: string;
-    position: number;
-    weight: number;
-    symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-    { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
-    { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
-    { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
-    { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
-    { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
-    { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
-    { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
-    { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O' },
-    { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F' },
-    { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne' },
-    { position: 11, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
-    { position: 12, name: 'Helium', weight: 4.0026, symbol: 'He' },
-    { position: 13, name: 'Lithium', weight: 6.941, symbol: 'Li' },
-    { position: 14, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
-    { position: 15, name: 'Boron', weight: 10.811, symbol: 'B' },
-    { position: 16, name: 'Carbon', weight: 12.0107, symbol: 'C' },
-    { position: 17, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
-    { position: 18, name: 'Oxygen', weight: 15.9994, symbol: 'O' },
-    { position: 19, name: 'Fluorine', weight: 18.9984, symbol: 'F' },
-    { position: 20, name: 'Neon', weight: 20.1797, symbol: 'Ne' },
+const Data: FakeData[] = [
+    { id: 1, titulo: 'Hydrogen', autor: 'teste1', datapublicacao: '05/04/2018', descricao: 'ual', editora: 2 },
+    { id: 2, titulo: 'Helium', autor: 'teste2', datapublicacao: '05/05/2018', descricao: 'teste2', editora: 1 },
+    { id: 3, titulo: 'Lithium', autor: 'teste3', datapublicacao: '05/06/2018', descricao: 'teste2', editora: 1 }
 ];

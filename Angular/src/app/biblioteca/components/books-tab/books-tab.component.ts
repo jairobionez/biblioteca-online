@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { BooksService } from "../../services/books.service";
 
 @Component({
     selector: 'books-tab',
@@ -8,6 +9,12 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 })
 
 export class BooksTabComponent { 
-    constructor() {
+    newData: any;
+    mytab: number;
+
+    constructor(private _bookService: BooksService) {
+        this._bookService.subject.subscribe(value => {
+            this.mytab = 1;
+        })
     }
 }
