@@ -1,0 +1,77 @@
+<mat-spinner *ngIf="!loadingfinish;" mode="indeterminate">
+
+</mat-spinner>
+
+<div [ngClass]="{'display': !loadingfinish}">
+    <mat-grid-list cols="2" rowHeight="4:0.5">
+        <mat-grid-tile [colspan]="1">
+            <mat-form-field>
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Pesquisar">
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1">
+            <button (click)="refresh()" class="atualize" mat-flat-button color="primary">
+                Atualizar
+            </button>
+        </mat-grid-tile>
+    </mat-grid-list>
+
+    <table mat-table [dataSource]="dataSource">
+        <!-- Codigo -->
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Código </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <!-- usuario -->
+        <ng-container matColumnDef="usuario">
+            <th mat-header-cell *matHeaderCellDef> Usuário </th>
+            <td mat-cell *matCellDef="let element"> {{element.usuario}} </td>
+        </ng-container>
+
+        <!-- Livro -->
+        <ng-container matColumnDef="livro">
+            <th mat-header-cell *matHeaderCellDef> Livro </th>
+            <td mat-cell *matCellDef="let element"> {{element.livro}} </td>
+        </ng-container>
+
+        <!-- Data de alocação -->
+        <ng-container matColumnDef="dataalocacao">
+            <th mat-header-cell *matHeaderCellDef> Data de alocação </th>
+            <td mat-cell *matCellDef="let element"> {{element.dataalocacao}} </td>
+        </ng-container>
+
+        <!-- Data de Evolução -->
+        <ng-container matColumnDef="datadevolucao">
+            <th mat-header-cell *matHeaderCellDef> Data de Evolução </th>
+            <td mat-cell *matCellDef="let element"> {{element.datadevolucao}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>
+                Ações
+            </th>
+            <td mat-cell *matCellDef="let row">
+                <button mat-icon-button [matMenuTriggerFor]="menu">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="edit(row.id)">
+                        <mat-icon>edit</mat-icon>
+                        <span>Editar</span>
+                    </button>
+                    <button mat-menu-item (click)="delete(row.id)">
+                        <mat-icon>delete</mat-icon>
+                        <span>Excluir</span>
+                    </button>
+                </mat-menu>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+    </mat-paginator>
+</div>
