@@ -11,6 +11,8 @@ import { BooksService } from "src/app/biblioteca/services/books.service";
 
 export class BooksRegisterComponent {
     // Event Emmiter
+    @Output()
+    onConfirmEdit: EventEmitter<any> = new EventEmitter<any>();
 
     formBook: FormGroup;
     fb: FormBuilder = new FormBuilder();
@@ -63,6 +65,7 @@ export class BooksRegisterComponent {
     }
 
     edit(){
+        this.onConfirmEdit.emit();
         this.modeEdit = false;
     }
 

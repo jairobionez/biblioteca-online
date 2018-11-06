@@ -28,7 +28,7 @@ export class BooksVisualizationComponent implements OnInit {
             this.dataSource = new MatTableDataSource(Data)
             this.setPaginator();
             this.loadingfinish = true;
-        }, 5000);
+        }, 1000);
     }
 
     setPaginator() {
