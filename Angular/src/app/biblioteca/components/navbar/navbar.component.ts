@@ -24,10 +24,14 @@ export class NavbarComponent {
     
     navigate(indice: number){
         switch(indice){
+            case Menu.home:
+                this.router.navigate(['/home'])
+                break;
             case Menu.cadastro:
                 this.router.navigate(['/books'])
                 break;
-            case Menu.alugar:                
+            case Menu.alugar: 
+                this.router.navigate(['/allocate'])               
                 break;
         }
     }
