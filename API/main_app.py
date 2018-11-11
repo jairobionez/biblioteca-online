@@ -1,9 +1,8 @@
 from flask import Flask, jsonify, request
-
 #Blueprints
-from books_api import books_api
+from api.books_api import books_api
 
-app = Flask(__name__)
+app = Flask(__name__)    
 
 if __name__ == '__main__':
     app.register_blueprint(books_api)
