@@ -1,7 +1,10 @@
 import { Component, Output, EventEmitter } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { DateAdapter } from "@angular/material";
-import { BooksService } from "src/app/biblioteca/services/books.service";
+import { BooksEditService } from "src/app/biblioteca/services/books/books-edit.service";
+import { BooksService } from "src/app/biblioteca/services/books/books.service";
+import { Book } from "src/app/biblioteca/models/book.entity";
+import { DateConvert } from "src/app/biblioteca/shared/date-convert";
 
 @Component({
     selector: 'books-register',
@@ -12,7 +15,7 @@ import { BooksService } from "src/app/biblioteca/services/books.service";
 export class BooksRegisterComponent {
     // Event Emmiter
     @Output()
-    onConfirmEdit: EventEmitter<any> = new EventEmitter<any>();
+    onConfirm: EventEmitter<any> = new EventEmitter<any>();
 
     formBook: FormGroup;
     fb: FormBuilder = new FormBuilder();
@@ -30,14 +33,15 @@ export class BooksRegisterComponent {
     ]
 
     constructor(private adapter: DateAdapter<any>,
-        private _bookServce: BooksService
+        private _booksEditService: BooksEditService,
+        private _booksService: BooksService
     ) {
         this.adapter.setLocale('pt')
         this.createForm();
     }
 
     ngOnInit() {
-        this._bookServce.subject.subscribe(value => {
+        this._booksEditService.subject.subscribe(value => {
             this.modeEdit = true;
             this.formBook.setValue(value);
         });
@@ -56,17 +60,23 @@ export class BooksRegisterComponent {
 
 
     save() {
-        if(this.formBook.value.id == 0){
-            // save
+        this.formBook.value.datapublicacao = DateConvert.convert(this.formBook.value.datapublicacao._i)
+
+        if(this.formBook.value.id == 0 || this.formBook.value.id == null){
+            this._booksService.saveBook(<Book>this.formBook.value)
+                .subscribe(response => {
+                    console.log(response);
+                    this.onConfirm.emit();
+                });
         }else{
-            this.edit();
+            this._booksService.updateBook(<Book>this.formBook.value)
+                .subscribe(response => {
+                    console.log(response);
+                    this.onConfirm.emit();
+                    this.modeEdit = false;
+                });
         }
         this.formBook.reset();
-    }
-
-    edit(){
-        this.onConfirmEdit.emit();
-        this.modeEdit = false;
     }
 
     clear() {

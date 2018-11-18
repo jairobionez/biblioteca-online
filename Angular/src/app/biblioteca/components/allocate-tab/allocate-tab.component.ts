@@ -1,6 +1,5 @@
-import { Component } from "@angular/core";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { AllocateService } from "../../services/allocate.service";
+import { Component, OnInit } from "@angular/core";
+import { AllocateEditService } from "../../services/allocate-edit.service";
 
 @Component({
     selector: 'allocate-tab',
@@ -8,14 +7,17 @@ import { AllocateService } from "../../services/allocate.service";
     styleUrls: ['./allocate-tab.component.scss']
 })
 
-export class AllocateTabComponent { 
+export class AllocateTabComponent implements OnInit { 
     newData: any;
     mytab: number;
 
     isActivate: boolean = false;
 
-    constructor(private _allocateService: AllocateService) {
-        this._allocateService.subject.subscribe(value => {
+    constructor(private _allocateEditService: AllocateEditService) {
+    }
+
+    ngOnInit(): void {
+        this._allocateEditService.subject.subscribe(value => {
             this.isActivate = true;
             this.mytab = 1;
         })

@@ -27,7 +27,7 @@ export class NavbarComponent {
             case Menu.home:
                 this.router.navigate(['/home'])
                 break;
-            case Menu.cadastro:
+            case Menu.livros:
                 this.router.navigate(['/books'])
                 break;
             case Menu.alugar: 

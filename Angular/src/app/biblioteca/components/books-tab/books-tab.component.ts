@@ -1,6 +1,5 @@
 import { Component } from "@angular/core";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { BooksService } from "../../services/books.service";
+import { BooksEditService } from "../../services/books/books-edit.service";
 
 @Component({
     selector: 'books-tab',
@@ -14,7 +13,7 @@ export class BooksTabComponent {
 
     isActivate: boolean = false;
 
-    constructor(private _bookService: BooksService) {
+    constructor(private _bookService: BooksEditService) {
         this._bookService.subject.subscribe(value => {
             this.isActivate = true;
             this.mytab = 1;

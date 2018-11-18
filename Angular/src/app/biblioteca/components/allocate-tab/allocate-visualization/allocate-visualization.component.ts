@@ -1,7 +1,7 @@
 import { Component, ViewChild, OnInit } from "@angular/core";
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { SelectionModel } from "@angular/cdk/collections";
-import { AllocateService } from "src/app/biblioteca/services/allocate.service";
+import { AllocateEditService } from "src/app/biblioteca/services/allocate-edit.service";
 
 @Component({
     selector: 'allocate-visualization',
@@ -18,7 +18,7 @@ export class AllocateVisualizationComponent implements OnInit {
     loadingfinish: boolean = false;
     selection = new SelectionModel<any>(true, []);
 
-    constructor(private _allocateService: AllocateService) {
+    constructor(private _allocateEditService: AllocateEditService) {
     }
 
     ngOnInit(): void {
@@ -39,7 +39,7 @@ export class AllocateVisualizationComponent implements OnInit {
     }
 
     edit(id: number): void {
-        this._allocateService.updateAllocateBooks(this.dataSource.data.find(d => d.id == id));
+        this._allocateEditService.updateAllocateBooks(this.dataSource.data.find(d => d.id == id));
     }
 
     delete(id: number): void {

@@ -2,7 +2,7 @@ from flask import Flask, jsonify, request, Blueprint
 from psycopg2.extras import RealDictCursor
 from connect_db import connectToDb
 
-books_api = Blueprint('books_api', 'books_api', url_prefix="/books")
+books_api = Blueprint('books_api', 'books_api', url_prefix="/api/books")
 
 @books_api.route('/', methods=['GET', 'POST', 'PUT'])
 def api_verbs():
@@ -20,13 +20,13 @@ def api_verbs():
         cur.close()
         conn.close()
 
-        return jsonify({'books': result})
+        return jsonify(result)
 
     elif request.method == 'POST':
-        dados = request.json['book']
+        dados = request.json
 
         conn = connectToDb()
-        cur = conn.cursor(cursor_factory=RealDictCursor)
+        cur = conn.cursor()
 
         try:
             cur.execute('''
@@ -49,10 +49,10 @@ def api_verbs():
         return "Livro inserido com sucesso"
 
     else:
-        dados = request.json['book']
+        dados = request.json
 
         conn = connectToDb()
-        cur = conn.cursor(cursor_factory=RealDictCursor)
+        cur = conn.cursor()
 
         try:
             cur.execute('''
@@ -109,6 +109,3 @@ def delete(id):
 
     cur.close()
     conn.close()
-
-    return "Livro deletado com sucesso"
-

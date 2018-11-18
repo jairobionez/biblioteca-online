@@ -1,8 +1,8 @@
-export class FakeData {
-    id: number;
+export class Book {
+    id: string;
     titulo: string;
     autor: string;
-    editora: number;
+    editora: string;
     descricao: string;
     datapublicacao: string;
 }

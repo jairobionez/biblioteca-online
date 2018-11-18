@@ -55,7 +55,8 @@ body {
   position: absolute !important;
   width: 100px;
   height: 100px;
-  bottom: 45vh !important;
+  z-index: 9999999999;
+  bottom: 40vh !important;
   right: 40vw !important;
 }
 

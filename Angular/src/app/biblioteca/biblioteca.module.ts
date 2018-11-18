@@ -31,10 +31,14 @@ import { BooksRegisterComponent } from "./components/books-tab/books-register/bo
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
 import { BooksVisualizationComponent } from "./components/books-tab/books-visualization/books-visualization.component";
-import { BooksService } from "./services/books.service";
-import { AllocateService } from './services/allocate.service';
 import { AllocateTabComponent } from './components/allocate-tab/allocate-tab.component';
 import { AllocateVisualizationComponent } from './components/allocate-tab/allocate-visualization/allocate-visualization.component';
+import { LoaderInterceptorService } from './services/loader-intercept.service';
+import { LoaderService } from './services/loader.service';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { BooksEditService } from './services/books/books-edit.service';
+import { AllocateEditService } from './services/allocate-edit.service';
+import { BooksService } from './services/books/books.service';
 
 const COMPONENTS = [
     BibliotecaComponent,
@@ -47,7 +51,11 @@ const COMPONENTS = [
 ];
 
 const SERVICES = [
-    BooksService, AllocateService
+    BooksService,
+    BooksEditService,
+    AllocateEditService,
+    LoaderService,
+    LoaderInterceptorService,
 ];
 
 @NgModule({
@@ -80,12 +88,14 @@ const SERVICES = [
         MatTableModule,
         MatPaginatorModule,
         MatProgressSpinnerModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        HttpClientModule
     ],
     providers: [
         ...SERVICES,
         {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
         {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+        {provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptorService, multi: true}
     ]
 })
 

@@ -1,8 +1,8 @@
 create table livros(
-	id serial primary key,
-	titulo varchar(100),
-	autor varchar(100),
-	editora varchar(100),
+	id serial primary key unique,
+	titulo varchar(100) not null,
+	autor varchar(100) not null,
+	editora varchar(100) not null,
 	descricao varchar(500),
-	datapublicacao varchar(20)
+	datapublicacao varchar(20) not null
 )

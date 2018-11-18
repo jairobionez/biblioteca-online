@@ -2,7 +2,7 @@ import { Subject } from 'rxjs';
 import { Injectable } from "@angular/core";
 
 @Injectable()
-export class AllocateService{
+export class AllocateEditService{
     subject = new Subject<any>();
 
     record: any;
