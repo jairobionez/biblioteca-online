@@ -3,16 +3,16 @@ from psycopg2.extras import RealDictCursor
 from connect_db import connectToDb
 import psycopg2
 
-books_api = Blueprint('books_api', 'books_api', url_prefix="/api/books")
+login_api = Blueprint('login_api', 'login_api', url_prefix="/api/login")
 
-@books_api.route('/', methods=['GET', 'POST', 'PUT'])
+@login_api.route('/', methods=['GET', 'POST', 'PUT'])
 def api_verbs():
     if request.method == 'GET':
         conn = connectToDb()
         cur = conn.cursor(cursor_factory=RealDictCursor)
 
         try:
-            cur.execute('select * from livros')
+            cur.execute('select * from autenticacao')
             result = cur.fetchall()
             cur.close()
         except (Exception, psycopg2.DatabaseError) as error:
@@ -20,7 +20,7 @@ def api_verbs():
         finally:
             if conn is not None:
                 conn.close()
-
+                
         return jsonify(result)
 
     elif request.method == 'POST':
@@ -31,14 +31,14 @@ def api_verbs():
 
         try:
             cur.execute('''
-                        insert into livros (titulo, autor, editora, descricao, datapublicacao)
+                        insert into autenticacao (username, email, nome, sobrenome, senha)
                         values (%s, %s, %s, %s, %s);
                         ''',
-                        (dados['titulo'],
-                         dados['autor'],
-                         dados['editora'],
-                         dados['descricao'],
-                         dados['datapublicacao']))
+                        (dados['username'],
+                         dados['email'],
+                         dados['nome'],
+                         dados['sobrenome'],
+                         dados['senha']))
             conn.commit()
             cur.close()
         except (Exception, psycopg2.DatabaseError) as error:
@@ -47,7 +47,7 @@ def api_verbs():
             if conn is not None:
                 conn.close()
 
-        return "Livro inserido com sucesso"
+        return "Cadastro efetuado com sucesso"
 
     else:
         dados = request.json
@@ -57,16 +57,15 @@ def api_verbs():
 
         try:
             cur.execute('''
-                        update livros
-                        set titulo = %s, autor = %s, editora = %s, descricao = %s, datapublicacao = %s
-                        where id = %s
+                        update autenticacao 
+                        set email = %s, nome = %s, sobrenome = %s, senha = %s 
+                        where username = %s
                         ''',
-                        (dados['titulo'],
-                         dados['autor'],
-                         dados['editora'],
-                         dados['descricao'],
-                         dados['datapublicacao'],
-                         dados['id']))
+                        (dados['email'],
+                         dados['nome'],
+                         dados['sobrenome'],
+                         dados['senha'],
+                         dados['username'],))
             conn.commit()
             cur.close()
         except (Exception, psycopg2.DatabaseError) as error:
@@ -75,18 +74,16 @@ def api_verbs():
             if conn is not None:
                 conn.close()
 
-        return("Livro atualizado com sucesso")
+        return("Cadastro atualizado com sucesso")
 
 
-@books_api.route('/<string:id>', methods=['GET'])
-def get_books_by_id(id):
+@login_api.route('/<string:username>', methods=['GET'])
+def get_login_by_id(username):
     conn = connectToDb()
     cur = conn.cursor(cursor_factory=RealDictCursor)
 
-    print(id)
-
     try:
-        cur.execute('''select * from livros where id = %s''', (id,))
+        cur.execute('select * from autenticacao where username = %s', (username,))
         result = cur.fetchone()
         cur.close()
     except (Exception, psycopg2.DatabaseError) as error:
@@ -97,13 +94,14 @@ def get_books_by_id(id):
 
     return jsonify(result)
 
-@books_api.route('/<string:id>', methods=['DELETE'])
-def delete(id):
+
+@login_api.route('/<string:username>', methods=['DELETE'])
+def delete(username):
     conn = connectToDb()
     cur = conn.cursor()
 
     try:
-        cur.execute('''delete from livros where id = %s ''', (id,))
+        cur.execute('delete from autenticacao where username = %s', (username,))
         conn.commit()
         cur.close()
     except (Exception, psycopg2.DatabaseError) as error:
@@ -112,4 +110,4 @@ def delete(id):
         if conn is not None:
             conn.close()
 
-    return "Livro deletado com sucesso"
+    return "Cadastro deletado com sucesso"
