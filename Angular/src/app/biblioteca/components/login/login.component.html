@@ -1,0 +1,25 @@
+<h1 mat-dialog-title>Login</h1>
+<mat-dialog-content>
+	<form [formGroup]="formLogin">
+		<input formControlName="id" type="hidden">
+		<mat-grid-list cols="1" rowHeight="4:0.5">
+			<mat-grid-tile [colspan]="1">
+				<mat-form-field>
+					<input matInput formControlName="username" placeholder="Nome de usuário">
+				</mat-form-field>
+			</mat-grid-tile>
+			<mat-grid-tile [colspan]="1">
+				<mat-form-field>
+					<input matInput formControlName="senha" placeholder="Senha">
+				</mat-form-field>
+			</mat-grid-tile>
+		</mat-grid-list>
+	</form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+	<mat-button-toggle-group>
+		<mat-button-toggle>Entrar</mat-button-toggle>
+		<mat-button-toggle (click)="clear()">Limpar</mat-button-toggle>
+		<mat-button-toggle>Criar conta</mat-button-toggle>
+	</mat-button-toggle-group>
+</mat-dialog-actions>

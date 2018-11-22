@@ -23,6 +23,11 @@ import { MatToolbarModule,
          MatPaginatorModule,
          MatProgressSpinnerModule,
          MatCheckboxModule,
+         MatDialogModule,
+         MatDialog,
+         MatDialogRef,
+         MAT_DIALOG_DEFAULT_OPTIONS,
+         MatButtonToggleModule,
          } from '@angular/material';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatInputModule } from '@angular/material/input';
@@ -39,6 +44,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BooksEditService } from './services/books/books-edit.service';
 import { AllocateEditService } from './services/allocate-edit.service';
 import { BooksService } from './services/books/books.service';
+import { LoginComponent } from './components/login/login.component';
 
 const COMPONENTS = [
     BibliotecaComponent,
@@ -47,7 +53,8 @@ const COMPONENTS = [
     BooksRegisterComponent,
     HomeComponent,
     AllocateTabComponent,
-    AllocateVisualizationComponent
+    AllocateVisualizationComponent,
+    LoginComponent
 ];
 
 const SERVICES = [
@@ -55,7 +62,7 @@ const SERVICES = [
     BooksEditService,
     AllocateEditService,
     LoaderService,
-    LoaderInterceptorService,
+    LoaderInterceptorService
 ];
 
 @NgModule({
@@ -89,14 +96,18 @@ const SERVICES = [
         MatPaginatorModule,
         MatProgressSpinnerModule,
         MatCheckboxModule,
-        HttpClientModule
+        HttpClientModule,
+        MatDialogModule,
+        MatButtonToggleModule
     ],
     providers: [
         ...SERVICES,
         {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
         {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
-        {provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptorService, multi: true}
-    ]
+        {provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptorService, multi: true},
+        {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}}
+    ],
+    entryComponents: [LoginComponent]
 })
 
 export class BibliotecaModule { }

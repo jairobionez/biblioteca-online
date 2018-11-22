@@ -1,9 +1,11 @@
-<div [hidden]="!isLoading">
-    <mat-spinner mode="indeterminate">
+<div *ngIf="!disableApplication; else home">
+    <div [hidden]="!isLoading">
+        <mat-spinner mode="indeterminate"></mat-spinner>
+    </div>
 
-    </mat-spinner>
+    <app-navbar></app-navbar>
 </div>
 
-<app-navbar>
-
-</app-navbar>
+<ng-template #home>
+    <img  style="width: 100%;" src="../../../../assets/canos.jpeg" />
+</ng-template>

@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from "@angular/core";
+import { Component, Output, EventEmitter, ViewChild, ElementRef } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { DateAdapter } from "@angular/material";
 import { BooksEditService } from "src/app/biblioteca/services/books/books-edit.service";
@@ -25,11 +25,6 @@ export class BooksRegisterComponent {
     editoras: any = [
         { "id": 1, "nome": "Editora1" },
         { "id": 2, "nome": "Editora2" }
-    ]
-
-    locado: any = [
-        { "id": 1, "nome": "SIM" },
-        { "id": 2, "nome": "NÃO" }
     ]
 
     constructor(private adapter: DateAdapter<any>,
@@ -79,7 +74,7 @@ export class BooksRegisterComponent {
         this.formBook.reset();
     }
 
-    clear() {
+    clear(){
         this.formBook.reset();
     }
 }
