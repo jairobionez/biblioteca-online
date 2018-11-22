@@ -2,9 +2,9 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Subscription } from "rxjs";
 import { LoaderService } from "./services/loader.service";
 import { LoaderState } from "./interface/loader.interface";
-import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material";
-import { LoginComponent } from "./components/login/login.component";
-import { finalize, tap } from "rxjs/operators";
+import { MatDialog, MatDialogRef } from "@angular/material";
+import { finalize } from "rxjs/operators";
+import { LoginDialogComponent } from "./components/login-dialog/login-dialog.component";
 
 @Component({
     selector: 'biblioteca',
@@ -17,7 +17,7 @@ export class BibliotecaComponent implements OnInit, OnDestroy {
 
     private subscription: Subscription;
 
-    loginDialog: MatDialogRef<LoginComponent>;
+    loginDialog: MatDialogRef<LoginDialogComponent>;
 
     constructor(
         private loaderService: LoaderService,
@@ -35,7 +35,7 @@ export class BibliotecaComponent implements OnInit, OnDestroy {
     }
 
     openLoginDialog(){
-        this.loginDialog = this.dialog.open(LoginComponent, {
+        this.loginDialog = this.dialog.open(LoginDialogComponent, {
             hasBackdrop: true,
             disableClose: true,
             height: '40%',

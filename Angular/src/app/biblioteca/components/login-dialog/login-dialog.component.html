@@ -10,7 +10,7 @@
 			</mat-grid-tile>
 			<mat-grid-tile [colspan]="1">
 				<mat-form-field>
-					<input matInput formControlName="senha" placeholder="Senha">
+					<input matInput type="password" formControlName="senha" placeholder="Senha">
 				</mat-form-field>
 			</mat-grid-tile>
 		</mat-grid-list>
@@ -18,7 +18,7 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
 	<mat-button-toggle-group>
-		<mat-button-toggle>Entrar</mat-button-toggle>
+		<mat-button-toggle (click)="login()">Entrar</mat-button-toggle>
 		<mat-button-toggle (click)="clear()">Limpar</mat-button-toggle>
 		<mat-button-toggle>Criar conta</mat-button-toggle>
 	</mat-button-toggle-group>

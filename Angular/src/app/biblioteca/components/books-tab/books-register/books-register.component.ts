@@ -55,26 +55,28 @@ export class BooksRegisterComponent {
 
 
     save() {
-        this.formBook.value.datapublicacao = DateConvert.convert(this.formBook.value.datapublicacao._i)
+        if (this.formBook.valid) {
+            this.formBook.value.datapublicacao = DateConvert.convert(this.formBook.value.datapublicacao._i)
 
-        if(this.formBook.value.id == 0 || this.formBook.value.id == null){
-            this._booksService.saveBook(<Book>this.formBook.value)
-                .subscribe(response => {
-                    console.log(response);
-                    this.onConfirm.emit();
-                });
-        }else{
-            this._booksService.updateBook(<Book>this.formBook.value)
-                .subscribe(response => {
-                    console.log(response);
-                    this.onConfirm.emit();
-                    this.modeEdit = false;
-                });
+            if (this.formBook.value.id == 0 || this.formBook.value.id == null) {
+                this._booksService.saveBook(<Book>this.formBook.value)
+                    .subscribe(response => {
+                        console.log(response);
+                        this.onConfirm.emit();
+                    });
+            } else {
+                this._booksService.updateBook(<Book>this.formBook.value)
+                    .subscribe(response => {
+                        console.log(response);
+                        this.onConfirm.emit();
+                        this.modeEdit = false;
+                    });
+            }
+            this.formBook.reset();
         }
-        this.formBook.reset();
     }
 
-    clear(){
+    clear() {
         this.formBook.reset();
     }
 }

@@ -1,4 +1,3 @@
-import { HomeComponent } from './components/home/home.component';
 import { NgModule } from "@angular/core";
 import { BibliotecaComponent } from "./biblioteca.component";
 import { CommonModule } from "@angular/common";
@@ -44,7 +43,11 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BooksEditService } from './services/books/books-edit.service';
 import { AllocateEditService } from './services/allocate-edit.service';
 import { BooksService } from './services/books/books.service';
-import { LoginComponent } from './components/login/login.component';
+import { LoginService } from './services/login/login.service';
+import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
+import { LoginComponent } from './pages/login/login.component';
+import { HomeComponent } from "./pages/home/home.component";
+import { RouterModule } from "@angular/router";
 
 const COMPONENTS = [
     BibliotecaComponent,
@@ -54,6 +57,7 @@ const COMPONENTS = [
     HomeComponent,
     AllocateTabComponent,
     AllocateVisualizationComponent,
+    LoginDialogComponent,
     LoginComponent
 ];
 
@@ -62,7 +66,8 @@ const SERVICES = [
     BooksEditService,
     AllocateEditService,
     LoaderService,
-    LoaderInterceptorService
+    LoaderInterceptorService,
+    LoginService
 ];
 
 @NgModule({
@@ -107,7 +112,7 @@ const SERVICES = [
         {provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptorService, multi: true},
         {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}}
     ],
-    entryComponents: [LoginComponent]
+    entryComponents: [LoginDialogComponent]
 })
 
 export class BibliotecaModule { }
