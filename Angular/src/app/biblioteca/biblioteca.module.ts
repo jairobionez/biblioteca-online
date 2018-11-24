@@ -48,6 +48,7 @@ import { LoginDialogComponent } from './components/login-dialog/login-dialog.com
 import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from "./pages/home/home.component";
 import { RouterModule } from "@angular/router";
+import { LoginRegisterComponent } from "./components/login-dialog/login-register/login-register.component";
 
 const COMPONENTS = [
     BibliotecaComponent,
@@ -58,7 +59,8 @@ const COMPONENTS = [
     AllocateTabComponent,
     AllocateVisualizationComponent,
     LoginDialogComponent,
-    LoginComponent
+    LoginComponent,
+    LoginRegisterComponent
 ];
 
 const SERVICES = [
@@ -112,7 +114,7 @@ const SERVICES = [
         {provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptorService, multi: true},
         {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}}
     ],
-    entryComponents: [LoginDialogComponent]
+    entryComponents: [LoginDialogComponent, LoginRegisterComponent]
 })
 
 export class BibliotecaModule { }

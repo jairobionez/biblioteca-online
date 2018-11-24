@@ -1,0 +1,39 @@
+<h1 mat-dialog-title>Cadastro de usuário</h1>
+<mat-dialog-content>
+    <form [formGroup]="formLoginRegister">
+        <mat-grid-list cols="2" rowHeight="4:1">
+            <mat-grid-tile [colspan]="1">
+                <mat-form-field>
+                    <input matInput formControlName="nome" placeholder="Nome">
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="1">
+                <mat-form-field>
+                    <input matInput formControlName="sobrenome" placeholder="Sobrenome">
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="2">
+                    <mat-form-field>
+                        <input matInput formControlName="email" placeholder="E-mail">
+                    </mat-form-field>
+                </mat-grid-tile>
+            <mat-grid-tile [colspan]="1">
+                <mat-form-field>
+                    <input matInput formControlName="username" placeholder="Nome de usuário">
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="1">
+                <mat-form-field>
+                    <input matInput type="password" formControlName="senha" placeholder="Senha">
+                </mat-form-field>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <mat-button-toggle-group>
+        <mat-button-toggle (click)="save()">Criar</mat-button-toggle>
+        <mat-button-toggle (click)="clear()">Limpar</mat-button-toggle>
+        <mat-button-toggle (click)="close()">Cancelar</mat-button-toggle>
+    </mat-button-toggle-group>
+</mat-dialog-actions>

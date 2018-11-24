@@ -1,7 +1,6 @@
 <h1 mat-dialog-title>Login</h1>
 <mat-dialog-content>
 	<form [formGroup]="formLogin">
-		<input formControlName="id" type="hidden">
 		<mat-grid-list cols="1" rowHeight="4:0.5">
 			<mat-grid-tile [colspan]="1">
 				<mat-form-field>
@@ -20,6 +19,6 @@
 	<mat-button-toggle-group>
 		<mat-button-toggle (click)="login()">Entrar</mat-button-toggle>
 		<mat-button-toggle (click)="clear()">Limpar</mat-button-toggle>
-		<mat-button-toggle>Criar conta</mat-button-toggle>
+		<mat-button-toggle (click)="openLoginRegisterDialog()">Criar conta</mat-button-toggle>
 	</mat-button-toggle-group>
 </mat-dialog-actions>

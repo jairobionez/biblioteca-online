@@ -1,8 +1,9 @@
 import { Component } from "@angular/core";
-import { MatDialogRef } from "@angular/material/dialog";
+import { MatDialogRef, MatDialog } from "@angular/material/dialog";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { LoginService } from "../../services/login/login.service";
 import { Router } from "@angular/router";
+import { LoginRegisterComponent } from "./login-register/login-register.component";
 
 @Component({
     selector: 'login-dialog',
@@ -14,8 +15,10 @@ export class LoginDialogComponent{
 
     formLogin: FormGroup;
     fb: FormBuilder = new FormBuilder();
+    loginRegisterDialogRef: MatDialogRef<LoginRegisterComponent>;
 
-    constructor(public dialogRef: MatDialogRef<LoginDialogComponent>,
+    constructor(public loginDialogRef: MatDialogRef<LoginDialogComponent>,
+                public dialog: MatDialog,
                 private _loginService: LoginService,
                 private router: Router) 
     {
@@ -33,8 +36,9 @@ export class LoginDialogComponent{
         if(this.formLogin.valid)
             this._loginService.getLoginByUsername(this.formLogin.value.username)
                 .subscribe(response => {
-                    if(response['username'] == this.formLogin.value.username) {
-                        this.dialogRef.close();
+                    if(response['username'] == this.formLogin.value.username 
+                        && response['senha'] == this.formLogin.value.senha) {
+                        this.loginDialogRef.close();
                         this.router.navigate(['/home']);
                     }
                     this.clear();
@@ -43,5 +47,14 @@ export class LoginDialogComponent{
 
     clear(){
         this.formLogin.reset();
+    }
+
+    openLoginRegisterDialog(){
+        this.loginRegisterDialogRef = this.dialog.open(LoginRegisterComponent, {
+            hasBackdrop: true,
+            disableClose: true,
+            height: '50%',
+            width: '30%'
+        });
     }
 }
