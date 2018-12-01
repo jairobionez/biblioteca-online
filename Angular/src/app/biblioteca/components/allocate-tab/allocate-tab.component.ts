@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { AllocateEditService } from "../../services/allocate-edit.service";
+import { AllocateEditService } from "../../services/allocate/allocate-edit.service";
 
 @Component({
     selector: 'allocate-tab',

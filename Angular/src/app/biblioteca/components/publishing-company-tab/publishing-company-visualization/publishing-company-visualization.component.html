@@ -18,28 +18,22 @@
         <td mat-cell *matCellDef="let element"> {{element.id}} </td>
     </ng-container>
 
-    <!-- usuario -->
-    <ng-container matColumnDef="usuario">
-        <th mat-header-cell *matHeaderCellDef> Usuário </th>
-        <td mat-cell *matCellDef="let element"> {{element.usuario}} </td>
+    <!-- Nome -->
+    <ng-container matColumnDef="nome">
+        <th mat-header-cell *matHeaderCellDef> Nome </th>
+        <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
     </ng-container>
 
-    <!-- Livro -->
-    <ng-container matColumnDef="livro">
-        <th mat-header-cell *matHeaderCellDef> Livro </th>
-        <td mat-cell *matCellDef="let element"> {{element.livro}} </td>
+    <!-- E-mail -->
+    <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> E-mail </th>
+        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
     </ng-container>
 
-    <!-- Data de alocação -->
-    <ng-container matColumnDef="data_locacao">
-        <th mat-header-cell *matHeaderCellDef> Data de alocação </th>
-        <td mat-cell *matCellDef="let element"> {{element.data_locacao}} </td>
-    </ng-container>
-
-    <!-- Data de Evolução -->
-    <ng-container matColumnDef="data_devolucao">
-        <th mat-header-cell *matHeaderCellDef> Data de Evolução </th>
-        <td mat-cell *matCellDef="let element"> {{element.data_devolucao}} </td>
+    <!-- Telefone -->
+    <ng-container matColumnDef="telefone">
+        <th mat-header-cell *matHeaderCellDef> Telefone </th>
+        <td mat-cell *matCellDef="let element"> {{element.telefone}} </td>
     </ng-container>
 
     <ng-container matColumnDef="actions">
@@ -67,5 +61,5 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 
-<mat-paginator #AllocatePaginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+<mat-paginator #PublishingCompanyPaginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
 </mat-paginator>

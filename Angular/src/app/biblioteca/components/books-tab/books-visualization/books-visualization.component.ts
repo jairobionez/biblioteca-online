@@ -15,7 +15,7 @@ export class BooksVisualizationComponent implements OnInit {
 
     displayedColumns: string[] = ['id', 'titulo', 'autor', 'datapublicacao', 'descricao', 'editora', 'actions'];
     dataSource = new MatTableDataSource<Book>();
-    @ViewChild(MatPaginator) paginator: MatPaginator;
+    @ViewChild('BooksPaginator') paginator: MatPaginator;
 
     selection = new SelectionModel<Book>(true, []);
 

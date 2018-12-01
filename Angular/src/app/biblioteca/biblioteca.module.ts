@@ -23,10 +23,9 @@ import { MatToolbarModule,
          MatProgressSpinnerModule,
          MatCheckboxModule,
          MatDialogModule,
-         MatDialog,
-         MatDialogRef,
          MAT_DIALOG_DEFAULT_OPTIONS,
          MatButtonToggleModule,
+         MatCardModule,
          } from '@angular/material';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatInputModule } from '@angular/material/input';
@@ -41,14 +40,21 @@ import { LoaderInterceptorService } from './services/loader-intercept.service';
 import { LoaderService } from './services/loader.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BooksEditService } from './services/books/books-edit.service';
-import { AllocateEditService } from './services/allocate-edit.service';
 import { BooksService } from './services/books/books.service';
 import { LoginService } from './services/login/login.service';
 import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
 import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from "./pages/home/home.component";
-import { RouterModule } from "@angular/router";
 import { LoginRegisterComponent } from "./components/login-dialog/login-register/login-register.component";
+import { SobreComponent } from "./pages/sobre/sobre.component";
+import { AllocateService } from "./services/allocate/allocate.service";
+import { AllocateEditService } from "./services/allocate/allocate-edit.service";
+import { AllocateRegisterComponent } from "./components/allocate-tab/allocate-register/allocate-register.component";
+import { PublishingCompanyTabComponent } from "./components/publishing-company-tab/publishing-company-tab.component";
+import { PublishingCompanyEditService } from "./services/publishing-company/publishing-company-edit.service";
+import { PublishingCompanyService } from "./services/publishing-company/publishing-company.service";
+import { PublishingCompanyRegisterComponent } from "./components/publishing-company-tab/publishing-company-register/publishing-company-register.component";
+import { PublishingCompanyVisualizationComponent } from "./components/publishing-company-tab/publishing-company-visualization/publishing-company-visualization.component";
 
 const COMPONENTS = [
     BibliotecaComponent,
@@ -60,13 +66,21 @@ const COMPONENTS = [
     AllocateVisualizationComponent,
     LoginDialogComponent,
     LoginComponent,
-    LoginRegisterComponent
+    LoginRegisterComponent,
+    SobreComponent,
+    AllocateRegisterComponent,
+    PublishingCompanyTabComponent,
+    PublishingCompanyRegisterComponent,
+    PublishingCompanyVisualizationComponent
 ];
 
 const SERVICES = [
+    PublishingCompanyService,
+    PublishingCompanyEditService,
     BooksService,
     BooksEditService,
     AllocateEditService,
+    AllocateService,
     LoaderService,
     LoaderInterceptorService,
     LoginService
@@ -105,7 +119,8 @@ const SERVICES = [
         MatCheckboxModule,
         HttpClientModule,
         MatDialogModule,
-        MatButtonToggleModule
+        MatButtonToggleModule,
+        MatCardModule
     ],
     providers: [
         ...SERVICES,

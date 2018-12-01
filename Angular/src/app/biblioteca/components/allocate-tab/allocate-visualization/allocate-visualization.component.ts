@@ -1,7 +1,8 @@
 import { Component, ViewChild, OnInit } from "@angular/core";
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { SelectionModel } from "@angular/cdk/collections";
-import { AllocateEditService } from "src/app/biblioteca/services/allocate-edit.service";
+import { AllocateEditService } from "src/app/biblioteca/services/allocate/allocate-edit.service";
+import { AllocateService } from "src/app/biblioteca/services/allocate/allocate.service";
 
 @Component({
     selector: 'allocate-visualization',
@@ -11,23 +12,26 @@ import { AllocateEditService } from "src/app/biblioteca/services/allocate-edit.s
 
 export class AllocateVisualizationComponent implements OnInit {
 
-    displayedColumns: string[] = ['id', 'usuario', 'livro', 'dataalocacao', 'datadevolucao', 'actions'];
+    displayedColumns: string[] = ['id', 'usuario', 'livro', 'data_locacao', 'data_devolucao', 'actions'];
     dataSource = new MatTableDataSource<any>();
-    @ViewChild(MatPaginator) paginator: MatPaginator;
+    @ViewChild('AllocatePaginator') paginator: MatPaginator;
 
-    loadingfinish: boolean = false;
     selection = new SelectionModel<any>(true, []);
 
-    constructor(private _allocateEditService: AllocateEditService) {
+    constructor(private _allocateEditService: AllocateEditService,
+                private _allocateService: AllocateService) {
     }
 
     ngOnInit(): void {
-        this.loadingfinish = false;
-        setTimeout(() => {
-            this.dataSource = new MatTableDataSource(Data)
-            this.setPaginator();
-            this.loadingfinish = true;
-        }, 1000);
+        this.getAllocate();
+    }
+
+    getAllocate(){
+        this._allocateService.getAllocate()
+            .subscribe(response => {
+                this.dataSource = new MatTableDataSource(response)
+                this.setPaginator();
+            });
     }
 
     setPaginator() {
@@ -42,19 +46,15 @@ export class AllocateVisualizationComponent implements OnInit {
         this._allocateEditService.updateAllocateBooks(this.dataSource.data.find(d => d.id == id));
     }
 
-    delete(id: number): void {
-        const index = this.dataSource.data.findIndex(k => k.id == id);
-        this.dataSource.data.splice(index, 1);
-        this.refresh();
+    delete(id: string): void {
+        this._allocateService.deleteAllocate(id)
+            .subscribe(response => {
+                console.log(response)
+                this.refresh();
+            });
     }
 
     refresh() {
-        this.dataSource = new MatTableDataSource(Data);
+        this.getAllocate();
     }
 }
-
-const Data: any[] = [
-    { id: 1, usuario: 'samuel', livro: 'Helium', dataalocacao:'05/05/2018', datadevolucao:'07/5/2018' },
-    { id: 2, usuario: 'jairo', livro: 'teste 2', dataalocacao:'05/05/2018', datadevolucao:'07/5/2018' },
-    { id: 3, usuario: 'caina', livro: 'teste 3', dataalocacao:'05/05/2018', datadevolucao:'07/5/2018' },   
-];

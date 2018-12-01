@@ -6,6 +6,8 @@ import { BibliotecaComponent } from "./biblioteca.component";
 import { BooksTabComponent } from "./components/books-tab/books-tab.component";
 import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
+import { SobreComponent } from './pages/sobre/sobre.component';
+import { PublishingCompanyTabComponent } from './components/publishing-company-tab/publishing-company-tab.component';
 
 const routes: Routes = [
     {
@@ -24,6 +26,12 @@ const routes: Routes = [
             },
             {
                 path: 'allocate', component: AllocateTabComponent
+            },
+            {
+                path: 'about', component: SobreComponent
+            },
+            {
+                path: 'publishing', component: PublishingCompanyTabComponent
             }
         ],
     }

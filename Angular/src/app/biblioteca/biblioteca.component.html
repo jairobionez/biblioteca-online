@@ -3,7 +3,7 @@
 </div>
 
 <div *ngIf="!disableApplication; else home">
-    <app-navbar></app-navbar>
+    <app-navbar (onLogout)="logout($event)"></app-navbar>
 </div>
 
 <ng-template #home>

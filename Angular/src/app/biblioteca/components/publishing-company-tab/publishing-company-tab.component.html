@@ -1,8 +1,8 @@
 <mat-tab-group [selectedIndex]="mytab">
     <mat-tab label="Visualização" id="visualization" [disabled]="isActivate">
-        <allocate-visualization></allocate-visualization>
+        <publishing-visualization></publishing-visualization>
     </mat-tab>
     <mat-tab label="Registro" id="register">
-        <allocate-register (onConfirm)="confirmEdit($event)"></allocate-register>
+        <publishing-register (onConfirm)="confirmEdit($event)"></publishing-register>
     </mat-tab>
 </mat-tab-group>

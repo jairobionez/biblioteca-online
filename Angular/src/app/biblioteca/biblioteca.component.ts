@@ -58,4 +58,8 @@ export class BibliotecaComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         this.subscription.unsubscribe();
     }
+
+    logout(){
+        this.openLoginDialog();
+    }
 }

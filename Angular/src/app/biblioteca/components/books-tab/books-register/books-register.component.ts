@@ -5,6 +5,8 @@ import { BooksEditService } from "src/app/biblioteca/services/books/books-edit.s
 import { BooksService } from "src/app/biblioteca/services/books/books.service";
 import { Book } from "src/app/biblioteca/models/book.entity";
 import { DateConvert } from "src/app/biblioteca/shared/date-convert";
+import { PublishingCompany } from "src/app/biblioteca/models/publishing-company.entity";
+import { PublishingCompanyService } from "src/app/biblioteca/services/publishing-company/publishing-company.service";
 
 @Component({
     selector: 'books-register',
@@ -22,14 +24,12 @@ export class BooksRegisterComponent {
 
     modeEdit: boolean = false;
 
-    editoras: any = [
-        { "id": 1, "nome": "Editora1" },
-        { "id": 2, "nome": "Editora2" }
-    ]
+    editoras: PublishingCompany[];
 
     constructor(private adapter: DateAdapter<any>,
         private _booksEditService: BooksEditService,
-        private _booksService: BooksService
+        private _booksService: BooksService,
+        private _publishService: PublishingCompanyService
     ) {
         this.adapter.setLocale('pt')
         this.createForm();
@@ -40,6 +40,10 @@ export class BooksRegisterComponent {
             this.modeEdit = true;
             this.formBook.setValue(value);
         });
+
+        this._publishService.getPublishing().subscribe(response => {
+            this.editoras = response;
+        });
     }
 
     createForm() {
@@ -47,7 +51,7 @@ export class BooksRegisterComponent {
             id: [0],
             titulo: ['', Validators.required],
             autor: ['', Validators.required],
-            editora: [0, Validators.required],
+            editora: ['', Validators.required],
             descricao: ['', Validators.required],
             datapublicacao: ['', Validators.required]
         });

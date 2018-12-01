@@ -1,0 +1,40 @@
+<form [formGroup]="formAllocate">
+    <input formControlName="id" type="hidden">
+    <mat-grid-list cols="2" rowHeight="4:0.5">
+        <mat-grid-tile [colspan]="1">
+            <mat-form-field>
+                <input matInput formControlName="usuario" placeholder="Usuário">
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1">
+            <mat-form-field>
+                <mat-select placeholder="Livro" formControlName="livro">
+                    <mat-option *ngFor="let book of books" [value]="book.id">
+                        {{book.titulo}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1">
+            <mat-form-field>
+                <input matInput [matDatepicker]="pickerAloc" formControlName="data_locacao" type="text" placeholder="Data de alocação">
+                <mat-datepicker-toggle matSuffix [for]="pickerAloc"></mat-datepicker-toggle>
+                <mat-datepicker #pickerAloc></mat-datepicker>
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1">
+            <mat-form-field>
+                <input matInput [matDatepicker]="pickerDev" formControlName="data_devolucao" type="text" placeholder="Data de devolução">
+                <mat-datepicker-toggle matSuffix [for]="pickerDev"></mat-datepicker-toggle>
+                <mat-datepicker #pickerDev></mat-datepicker>
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2">
+            <mat-chip-list>
+                <mat-chip *ngIf="!modeEdit" (click)="save()"> Salvar </mat-chip>
+                <mat-chip *ngIf="modeEdit" (click)="save()"> Editar </mat-chip>
+                <mat-chip color="primary" selected (click)="clear()">Limpar</mat-chip>
+            </mat-chip-list>
+        </mat-grid-tile>
+    </mat-grid-list>
+</form>
