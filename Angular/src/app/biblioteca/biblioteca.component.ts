@@ -38,8 +38,8 @@ export class BibliotecaComponent implements OnInit, OnDestroy {
         this.loginDialog = this.dialog.open(LoginDialogComponent, {
             hasBackdrop: true,
             disableClose: true,
-            height: '40%',
-            width: '30%'
+            height: '40vh',
+            width: '30vw'
         });
 
         this.loginDialog.afterOpen()

@@ -7,6 +7,8 @@ import { AllocateService } from "src/app/biblioteca/services/allocate/allocate.s
 import { Allocate } from "src/app/biblioteca/models/allocate.entity";
 import { Book } from "src/app/biblioteca/models/book.entity";
 import { BooksService } from "src/app/biblioteca/services/books/books.service";
+import { Login } from "src/app/biblioteca/models/login.entity";
+import { LoginService } from "src/app/biblioteca/services/login/login.service";
 
 @Component({
     selector: 'allocate-register',
@@ -24,11 +26,13 @@ export class AllocateRegisterComponent{
     
         modeEdit: boolean = false;
         books: Book[];
+        users: Login[];
     
         constructor(private adapter: DateAdapter<any>,
             private _allocateEditService: AllocateEditService,
             private _allocateService: AllocateService,
-            private _bookService: BooksService
+            private _bookService: BooksService,
+            private _loginService: LoginService
         ) {
             this.adapter.setLocale('pt')
             this.createForm();
@@ -43,7 +47,11 @@ export class AllocateRegisterComponent{
             this._bookService.getBooks()
             .subscribe(response => {
                 this.books = response;
-            })
+            });
+
+            this._loginService.getUsers().subscribe(response => {
+                    this.users = response;
+                });
         }
     
         createForm() {

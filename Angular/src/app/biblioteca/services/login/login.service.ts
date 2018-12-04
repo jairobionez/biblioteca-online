@@ -22,6 +22,16 @@ export class LoginService {
             );
     }
 
+    public getUsers(): Observable<Login[]>{
+        return this.http.get(base.url + '/login/')
+            .pipe(
+                map((login: Login[]) => {return login}),
+                catchError((error) => {
+                    return throwError("Usário não existe");
+                })
+            );
+    }
+
     public saveLogin(login: Login): Observable<string>{
         debugger;
         return this.http.post(base.url + '/login/', login, {responseType: 'text'})

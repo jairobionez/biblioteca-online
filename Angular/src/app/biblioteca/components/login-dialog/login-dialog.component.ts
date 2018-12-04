@@ -53,8 +53,8 @@ export class LoginDialogComponent{
         this.loginRegisterDialogRef = this.dialog.open(LoginRegisterComponent, {
             hasBackdrop: true,
             disableClose: true,
-            height: '50%',
-            width: '30%'
+            height: '45vh',
+            width: '30vw'
         });
     }
 }

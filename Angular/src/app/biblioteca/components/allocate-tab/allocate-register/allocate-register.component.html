@@ -3,7 +3,11 @@
     <mat-grid-list cols="2" rowHeight="4:0.5">
         <mat-grid-tile [colspan]="1">
             <mat-form-field>
-                <input matInput formControlName="usuario" placeholder="Usuário">
+                <mat-select placeholder="Usuário" formControlName="usuario">
+                    <mat-option *ngFor="let user of users" [value]="user.username">
+                        {{user.username}}
+                    </mat-option>
+                </mat-select>
             </mat-form-field>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="1">
